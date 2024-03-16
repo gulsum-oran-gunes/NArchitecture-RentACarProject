@@ -10,10 +10,10 @@ namespace Core.Persistence.Repositories
         Task<IPaginate<TEntity>>GetListPaginateAsync(Expression<Func<TEntity, bool>>? predicate = null,
                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderby = null,
                    Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-                   int index=0, int size=10, bool enableTracking = true, CancellationToken cancellationToken = default);
-        Task<IPaginate<TEntity>> GetListByDynamicAsync(Dynamic.Dynamic dynamic,
+                   int index=0, int size=10, bool withDeleted = false, bool enableTracking = true, CancellationToken cancellationToken = default);
+        Task<IPaginate<TEntity>> GetListByDynamicAsync(Dynamic.Dynamic dynamic, Expression<Func<TEntity, bool>>? predicate = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-            int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default);
+            int index = 0, int size = 10, bool withDeleted = false, bool enableTracking = true, CancellationToken cancellationToken = default);
         Task<List<TEntity>> GetAllAsync
             (Expression<Func<TEntity, bool>> predicate = null,
              Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
@@ -23,7 +23,7 @@ namespace Core.Persistence.Repositories
 
         Task<TEntity> AddAsync(TEntity entity);
         Task<TEntity> UpdateAsync(TEntity entity);
-        Task<TEntity> DeleteAsync(TEntity entity);
+        Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false);
 
     }
 }

@@ -23,6 +23,7 @@ namespace Persistence.EntityTypeConfigurations
 
             builder.HasOne(x => x.Model);
             builder.HasMany(x => x.CarImages);
+            builder.HasQueryFilter(x => !x.DeletedDate.HasValue);
         }
     }
 }
