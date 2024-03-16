@@ -1,4 +1,5 @@
 ﻿
+using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Validation;
@@ -24,12 +25,14 @@ namespace Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
             services.AddScoped<Stopwatch>();
             services.AddSingleton<LoggerServiceBase, MongoDbLogger>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-
             return services;
+
         }
     }
 }
