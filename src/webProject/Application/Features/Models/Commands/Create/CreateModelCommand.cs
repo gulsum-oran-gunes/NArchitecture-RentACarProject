@@ -17,6 +17,6 @@ namespace Application.Features.Models.Commands.Create
         public string Name { get; set; }
         public int Interval => 1;
         public bool BypassCache { get; }
-        public string CacheKey => "brand-list";
+        public string CacheKey => "model-list";
     }
 }

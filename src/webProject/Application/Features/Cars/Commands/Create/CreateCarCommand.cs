@@ -20,6 +20,6 @@ namespace Application.Features.Cars.Commands.Create
         public double DailyPrice { get; set; }
         public int Interval => 1;
         public bool BypassCache { get; }
-        public string CacheKey => "brand-list";
+        public string CacheKey => "car-list";
     }
 }

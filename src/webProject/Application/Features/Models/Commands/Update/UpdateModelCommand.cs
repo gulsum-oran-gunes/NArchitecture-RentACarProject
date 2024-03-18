@@ -15,7 +15,7 @@ namespace Application.Features.Models.Commands.Update
         public int BrandId { get; set; }
         public string Name { get; set; }
         public bool BypassCache { get; }
-        public string CacheKey => "brand-list";
+        public string CacheKey => "model-list";
 
     }
 }

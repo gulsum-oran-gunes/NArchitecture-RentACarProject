@@ -16,7 +16,7 @@ namespace Application.Features.Models.Queries.GetListPagination
         public PageRequest PageRequest { get; set; }
         public bool BypassCache { get; }
 
-        public string CacheKey => "brand-list";
+        public string CacheKey => "model-list";
 
         public TimeSpan? SlidingExpiration { get; }
     }

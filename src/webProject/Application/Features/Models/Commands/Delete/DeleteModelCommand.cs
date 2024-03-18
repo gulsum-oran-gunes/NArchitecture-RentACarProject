@@ -13,6 +13,6 @@ namespace Application.Features.Models.Commands.Delete
     {
         public int Id { get; set; }
         public bool BypassCache { get; }
-        public string CacheKey => "brand-list";
+        public string CacheKey => "model-list";
     }
 }

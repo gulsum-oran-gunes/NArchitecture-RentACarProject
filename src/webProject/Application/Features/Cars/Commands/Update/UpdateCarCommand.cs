@@ -18,6 +18,6 @@ namespace Application.Features.Cars.Commands.Update
         public int State { get; set; }
         public double DailyPrice { get; set; }
         public bool BypassCache { get; }
-        public string CacheKey => "brand-list";
+        public string CacheKey => "car-list";
     }
 }
