@@ -5,7 +5,8 @@ using Application.Features.Cars.Commands.Create;
 using Application.Features.Cars.Commands.Delete;
 using Application.Features.Cars.Commands.Update;
 using Application.Features.Cars.Models;
-using Application.Features.Cars.Queries;
+using Application.Features.Cars.Queries.GetById;
+using Application.Features.Cars.Queries.GetList;
 using Application.Features.Cars.Queries.GetListDynamic;
 using Application.Features.Cars.Queries.GetListPagination;
 using Application.Requests;
@@ -35,9 +36,9 @@ namespace WebAPI.Controllers
             return Created("", await Mediator.Send(command));
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetListAsync()
         {
-            return Created("", await Mediator.Send(new GetAllCarQuery()));
+            return Created("", await Mediator.Send(new GetListCarQuery()));
         }
 
         [HttpGet("GetByIdCar", Name = "GetByIdCar")]
@@ -46,7 +47,7 @@ namespace WebAPI.Controllers
             return Created("", await Mediator.Send(query));
         }
 
-        [HttpGet("pagination")]
+        [HttpGet("Pagination")]
         public async Task<IActionResult> GetListPagination([FromQuery] PageRequest pageRequest)
         {
             GetListPaginationCarQuery query = new() { PageRequest = pageRequest };
@@ -54,7 +55,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("dynamic")]
+        [HttpPost("Dynamic")]
         public async Task<IActionResult> GetListDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
         {
             GetListCarDynamicQuery carDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };

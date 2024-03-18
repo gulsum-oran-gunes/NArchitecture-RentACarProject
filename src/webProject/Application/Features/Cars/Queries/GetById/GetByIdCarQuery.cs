@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Cars.Queries
+namespace Application.Features.Cars.Queries.GetById
 {
     public class GetByIdCarQuery : IRequest<GetByIdCarResponse>
     {

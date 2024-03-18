@@ -1,5 +1,4 @@
 ﻿using Application.Features.Cars.Dtos;
-using Application.Features.Cars.Queries;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -10,23 +9,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Cars.Queries
+namespace Application.Features.Cars.Queries.GetList
 {
-    public class GetAllCarQueryHandler : IRequestHandler<GetAllCarQuery, List<GetAllCarResponse>>
+    public class GetListCarQueryHandler : IRequestHandler<GetListCarQuery, List<GetListCarResponse>>
     {
         private readonly ICarRepository _carRepository;
         private readonly IMapper _mapper;
 
-        public GetAllCarQueryHandler(ICarRepository carRepository, IMapper mapper)
+        public GetListCarQueryHandler(ICarRepository carRepository, IMapper mapper)
         {
             _carRepository = carRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<GetAllCarResponse>> Handle(GetAllCarQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetListCarResponse>> Handle(GetListCarQuery request, CancellationToken cancellationToken)
         {
             List<Car> cars = await _carRepository.GetAllAsync();
-            List<GetAllCarResponse> responses = _mapper.Map<List<GetAllCarResponse>>(cars);
+            List<GetListCarResponse> responses = _mapper.Map<List<GetListCarResponse>>(cars);
             return responses;
         }
     }

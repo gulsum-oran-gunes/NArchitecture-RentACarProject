@@ -1,5 +1,4 @@
 ﻿using Application.Features.Models.Dtos;
-using Application.Features.Models.Queries;
 using Application.Features.Models.Dtos;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -11,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Models.Queries
+namespace Application.Features.Models.Queries.GetById
 {
-    public class GetByIdModelQueryHandler :IRequestHandler<GetByIdModelQuery, GetByIdModelResponse>
+    public class GetByIdModelQueryHandler : IRequestHandler<GetByIdModelQuery, GetByIdModelResponse>
     {
 
         private readonly IModelRepository _modelRepository;
@@ -32,6 +31,6 @@ namespace Application.Features.Models.Queries
             return response;
         }
 
-       
+
     }
 }

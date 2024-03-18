@@ -1,5 +1,4 @@
 ﻿using Application.Features.Cars.Dtos;
-using Application.Features.Cars.Queries;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -11,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Cars.Queries
+namespace Application.Features.Cars.Queries.GetById
 {
     public class GetByIdCarQueryHandler : IRequestHandler<GetByIdCarQuery, GetByIdCarResponse>
     {
@@ -30,6 +29,6 @@ namespace Application.Features.Cars.Queries
             GetByIdCarResponse response = _mapper.Map<GetByIdCarResponse>(car);
             return response;
         }
-       
+
     }
 }

@@ -4,6 +4,8 @@ using Application.Features.Brands.Commands.Update;
 using Application.Features.Brands.Dtos;
 using Application.Features.Brands.Models;
 using Application.Features.Brands.Queries;
+using Application.Features.Brands.Queries.GetById;
+using Application.Features.Brands.Queries.GetList;
 using Application.Features.Brands.Queries.GetListDynamic;
 using Application.Features.Brands.Queries.GetListPagination;
 using Application.Requests;
@@ -33,9 +35,9 @@ namespace WebAPI.Controllers
             return Created("", await Mediator.Send(command));
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetListAsync()
         {
-            return Created("", await Mediator.Send(new GetAllBrandQuery()));
+            return Created("", await Mediator.Send( new GetListBrandQuery()));
         }
 
         [HttpGet("GetByIdBrand", Name = "GetByIdBrand")]
@@ -44,7 +46,7 @@ namespace WebAPI.Controllers
             return Created("", await Mediator.Send(query));
         }
 
-        [HttpGet("pagination")]
+        [HttpGet("Pagination")]
         public async Task<IActionResult> GetListPagination([FromQuery] PageRequest pageRequest)
         {
             GetListPaginationBrandQuery query = new() { PageRequest = pageRequest };
@@ -52,7 +54,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("dynamic")]
+        [HttpPost("Dynamic")]
         public async Task<IActionResult> GetListDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
         {
             GetListBrandDynamicQuery brandDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };

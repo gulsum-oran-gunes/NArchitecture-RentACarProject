@@ -1,5 +1,4 @@
 ﻿using Application.Features.Brands.Dtos;
-using Application.Features.Cars.Dtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Cars.Queries
+namespace Application.Features.Brands.Queries.GetList
 {
-    public class GetAllCarQuery : IRequest<List<GetAllCarResponse>>
+    public class GetListBrandQuery : IRequest<List<GetListBrandResponse>>
     {
     }
 }

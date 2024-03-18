@@ -25,7 +25,7 @@ namespace Application.Features.Brands.Profiles
             CreateMap<Brand, DeleteBrandCommand>().ReverseMap();
             CreateMap<Brand, DeletedBrandResponse>().ReverseMap();
             CreateMap<Brand, GetByIdBrandResponse>().ReverseMap();
-            CreateMap<Brand, GetAllBrandResponse>().ReverseMap();
+           
             CreateMap<Brand, GetListBrandResponse>().ReverseMap();
             CreateMap<IPaginate<Brand>, BrandListModel>().ReverseMap();
 

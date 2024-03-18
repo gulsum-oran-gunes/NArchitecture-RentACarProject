@@ -9,26 +9,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Brands.Queries
+namespace Application.Features.Brands.Queries.GetList
 {
-    public class GetAllBrandQueryHandler :IRequestHandler<GetAllBrandQuery, List<GetAllBrandResponse>>
+    public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, List<GetListBrandResponse>>
     {
         private readonly IBrandRepository _brandRepository;
         private readonly IMapper _mapper;
 
-        public GetAllBrandQueryHandler(IBrandRepository brandRepository, IMapper mapper)
+        public GetListBrandQueryHandler(IBrandRepository brandRepository, IMapper mapper)
         {
             _brandRepository = brandRepository;
             _mapper = mapper;
         }
 
-        public async Task<List<GetAllBrandResponse>> Handle(GetAllBrandQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetListBrandResponse>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
         {
             List<Brand> brands = await _brandRepository.GetAllAsync();
-            List<GetAllBrandResponse> responses = _mapper.Map<List<GetAllBrandResponse>>(brands);
+            List<GetListBrandResponse> responses = _mapper.Map<List<GetListBrandResponse>>(brands);
             return responses;
         }
     }
 
-    
+
 }
