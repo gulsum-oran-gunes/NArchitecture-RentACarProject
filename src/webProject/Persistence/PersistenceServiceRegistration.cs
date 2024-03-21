@@ -26,6 +26,11 @@ namespace Persistence
             services.AddScoped<IModelRepository, ModelRepository>();
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarImageRepository, CarImageRepository>();
+            services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+           
 
             return services;
         }

@@ -22,22 +22,27 @@ namespace Application.Services.CarImageService
             _carImageBusinessRules = carImageBusinessRules;
         }
 
-        public async Task Add(IFormFile file, CarImage carImage)
+        public async Task<CarImage> Add(IFormFile file, CarImageRequest request)
         {
-            await _carImageBusinessRules.CheckIfCarImageNull(carImage.CarId);
+            await _carImageBusinessRules.CheckIfCarImageNull(request.CarId);
             await _carImageBusinessRules.CheckIfCarImageFormat(file);
-            await _carImageBusinessRules.CheckIfImageLimit(carImage.CarId);
+            await _carImageBusinessRules.CheckIfImageLimit(request.CarId);
+            CarImage carImage = new CarImage()
+            {
+                CarId = request.CarId,
+                ImagePath = request.ImagePath,
+            };
             carImage.ImagePath = FileHelper.Add(file, "CarImages");
-            await _carImageRepository.AddAsync(carImage);
+            return await _carImageRepository.AddAsync(carImage);
 
         }
 
-        public async Task Delete(CarImage carImage)
+        public async Task<CarImage> Delete(CarImage carImage)
         {
             await _carImageBusinessRules.CarImageIdShouldExistsWhenSelected(carImage.Id);
             var path = Path.Combine(Directory.GetCurrentDirectory(), $@"wwwroot") + _carImageRepository.GetAsync(c => c.Id == carImage.Id).Result.ImagePath;
             var result = FileHelper.Delete(path);
-            await _carImageRepository.DeleteAsync(carImage);
+            return await _carImageRepository.DeleteAsync(carImage);
 
         }
 
@@ -56,17 +61,18 @@ namespace Application.Services.CarImageService
 
         public async Task<List<CarImage>> GetList()
         {
-            return await _carImageRepository.GetAllAsync(include: c => c.Include(c => c.Car));
+            return await _carImageRepository.GetAllAsync();
         }
 
-        public async Task Update(IFormFile file, CarImage carImage)
+        public async Task<CarImage> Update(IFormFile file, CarImage carImage)
         {
             await _carImageBusinessRules.CheckIfCarImageFormat(file);
             await _carImageBusinessRules.CheckIfCarImageNull(carImage.CarId);
             var path = Path.Combine(Directory.GetCurrentDirectory(), $@"wwwroot") + _carImageRepository.GetAsync(c => c.Id == carImage.Id).Result.ImagePath;
             carImage.ImagePath = FileHelper.Update(path, file, "CarImages");
-            await _carImageRepository.UpdateAsync(carImage);
+            return await _carImageRepository.UpdateAsync(carImage);
         }
-    }
 
+       
+    }
 }

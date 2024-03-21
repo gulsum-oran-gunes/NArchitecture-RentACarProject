@@ -1,11 +1,16 @@
 ﻿
+using Application.Features.Auth.Rules;
+using Application.Services.AuthServices.AuthService;
+using Application.Services.AuthServices.UserService;
 using Application.Services.CarImageService;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Validation;
 using Core.CrossCuttingConcerns.Logging.Serilog;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
+using Core.Security.JWT;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -22,17 +27,22 @@ namespace Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.AddScoped<Stopwatch>();
+            services.AddSingleton<LoggerServiceBase, MongoDbLogger>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<CarImageBusinessRules>();
+            services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<ICarImageService, CarImageManager>();
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IAuthService, AuthManager>();
+            services.AddSingleton<TokenOptions>();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
-            services.AddScoped<Stopwatch>();
-            services.AddSingleton<LoggerServiceBase, MongoDbLogger>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddScoped<ICarImageService, CarImageManager>();
-            services.AddScoped<CarImageBusinessRules>();
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
 
             return services;
 
