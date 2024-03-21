@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Brands\Rules\" />
+    <Folder Include="Features\CarImages\Constants\" />
     <Folder Include="Features\Cars\Constants\" />
     <Folder Include="Features\Cars\Rules\" />
     <Folder Include="Features\Models\Constants\" />

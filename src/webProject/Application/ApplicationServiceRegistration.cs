@@ -1,4 +1,5 @@
 ﻿
+using Application.Services.CarImageService;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
@@ -30,6 +31,8 @@ namespace Application
             services.AddScoped<Stopwatch>();
             services.AddSingleton<LoggerServiceBase, MongoDbLogger>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped<ICarImageService, CarImageManager>();
+            services.AddScoped<CarImageBusinessRules>();
 
             return services;
 
